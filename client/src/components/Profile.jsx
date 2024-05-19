@@ -12,7 +12,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/profile", {
+        const response = await axios.get("https://ecobase-1.onrender.com/profile", {
           headers: {
             Authorization: `Bearer ${window.localStorage.getItem("token")}`,
           },
@@ -49,7 +49,7 @@ const Profile = () => {
     event.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:3000/profile",
+        "https://ecobase-1.onrender.com/profile",
         {
           firstName,
           lastName,

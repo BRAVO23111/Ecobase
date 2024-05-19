@@ -23,7 +23,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const { username, password, email } = credentials;
-      const response = await axios.post('http://localhost:3000/auth/login', {
+      const response = await axios.post('https://ecobase-1.onrender.com/auth/login', {
         username,
         password,
         email,

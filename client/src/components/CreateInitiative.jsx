@@ -18,7 +18,7 @@ const CreateInitiativeForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3000/initiative', formData, {
+      const response = await axios.post('https://ecobase-1.onrender.com/initiative', formData, {
         headers: {
           Authorization: `Bearer ${window.localStorage.getItem('token')}`
         }

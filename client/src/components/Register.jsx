@@ -23,7 +23,7 @@ const Register = () => {
     e.preventDefault();
     try {
       const { username, password, email } = credentials;
-      const response = await axios.post('http://localhost:3000/auth/register', {
+      const response = await axios.post('https://ecobase-1.onrender.com/auth/register', {
         username,
         password,
         email,

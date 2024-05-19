@@ -8,7 +8,7 @@ const JoinedInitiatives = () => {
   useEffect(() => {
     const fetchJoinedInitiatives = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/initiative/joined', {
+        const response = await axios.get('https://ecobase-1.onrender.com/initiative/joined', {
           headers: {
             Authorization: `Bearer ${window.localStorage.getItem('token')}`,
           },
