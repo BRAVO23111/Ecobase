@@ -21,7 +21,7 @@ const JoinedInitiatives = () => {
 
     const fetchProfile = async () => {
       try {
-        const response = await axios.get('https://ecobase-1.onrender.com/profile', {
+        const response = await axios.get('http://localhost:3000/profile', {
           headers: {
             Authorization: `Bearer ${window.localStorage.getItem('token')}`,
           },

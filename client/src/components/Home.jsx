@@ -70,7 +70,7 @@ const Home = () => {
   // Function to delete an initiative
   const deleteInitiative = async (initiativeId) => {
     try {
-      await axios.delete(`https://ecobase-1.onrender.com/initiative/${initiativeId}`, {
+      await axios.delete(`http://localhost:3000/initiative/${initiativeId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -94,7 +94,7 @@ const Home = () => {
   const saveEditedInitiative = async () => {
     try {
       await axios.put(
-        `https://ecobase-1.onrender.com/initiative/${editedInitiative._id}`,
+        `http://localhost:3000/initiative/${editedInitiative._id}`,
         {
           name: editedName,
           description: editedDescription,
