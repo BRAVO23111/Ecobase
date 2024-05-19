@@ -38,9 +38,9 @@ const CreateInitiativeForm = () => {
   };
 
   return (
-    <div className="max-w-lg mx-auto p-8 bg-white rounded-lg shadow-lg mt-10">
-      <h2 className="text-3xl font-bold mb-6 text-center">Create Initiative</h2>
-      <form onSubmit={handleSubmit} className="space-y-6">
+    <div className="max-w-lg mx-auto p-4 md:p-8 bg-white rounded-lg shadow-lg mt-6 md:mt-10">
+      <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center">Create Initiative</h2>
+      <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
         <div>
           <label className="block text-lg font-medium mb-2" htmlFor="name">Name</label>
           <input
@@ -49,7 +49,7 @@ const CreateInitiativeForm = () => {
             id="name"
             value={formData.name}
             onChange={handleChange}
-            className="w-full border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-green-500 outline-none"
+            className="w-full border border-gray-300 p-2 md:p-3 rounded-lg focus:ring-2 focus:ring-green-500 outline-none"
             required
           />
         </div>
@@ -60,7 +60,7 @@ const CreateInitiativeForm = () => {
             id="description"
             value={formData.description}
             onChange={handleChange}
-            className="w-full border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-green-500 outline-none"
+            className="w-full border border-gray-300 p-2 md:p-3 rounded-lg focus:ring-2 focus:ring-green-500 outline-none"
             required
           />
         </div>
@@ -72,7 +72,7 @@ const CreateInitiativeForm = () => {
             id="date"
             value={formData.date}
             onChange={handleChange}
-            className="w-full border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-green-500 outline-none"
+            className="w-full border border-gray-300 p-2 md:p-3 rounded-lg focus:ring-2 focus:ring-green-500 outline-none"
             required
           />
         </div>
@@ -84,12 +84,12 @@ const CreateInitiativeForm = () => {
             id="location"
             value={formData.location}
             onChange={handleChange}
-            className="w-full border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-green-500 outline-none"
+            className="w-full border border-gray-300 p-2 md:p-3 rounded-lg focus:ring-2 focus:ring-green-500 outline-none"
             required
           />
         </div>
         <div className="text-center">
-          <button type="submit" className="bg-green-500 text-white py-3 px-6 rounded-lg hover:bg-green-600 transition duration-200">
+          <button type="submit" className="bg-green-500 text-white py-2 md:py-3 px-4 md:px-6 rounded-lg hover:bg-green-600 transition duration-200">
             Create
           </button>
         </div>

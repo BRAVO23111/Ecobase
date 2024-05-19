@@ -49,7 +49,7 @@ const Profile = () => {
     event.preventDefault();
     try {
       const response = await axios.post(
-        "https://ecobase-1.onrender.com/profile",
+        "http://localhost:3000/profile",
         {
           firstName,
           lastName,

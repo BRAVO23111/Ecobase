@@ -42,11 +42,11 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="container mx-auto p-8 bg-gray-50 rounded-lg shadow-lg w-full">
-      <h1 className="text-4xl font-extrabold mb-10 text-center text-green-700">Dashboard</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <h2 className="text-2xl font-bold mb-4 text-green-600">Action Type Summary</h2>
+    <div className="container mx-auto p-4 md:p-8 bg-gray-50 rounded-lg shadow-lg w-full">
+      <h1 className="text-2xl md:text-4xl font-extrabold mb-6 md:mb-10 text-center text-green-700">Dashboard</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+        <div className="bg-white p-4 md:p-6 rounded-lg shadow-md">
+          <h2 className="text-xl md:text-2xl font-bold mb-4 text-green-600">Action Type Summary</h2>
           <ul>
             {Object.entries(dashboardData.actionSummary).map(
               ([actionType, count]) => (
@@ -58,27 +58,27 @@ const Dashboard = () => {
             )}
           </ul>
         </div>
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <h2 className="text-2xl font-bold mb-4 text-green-600">Activities</h2>
+        <div className="bg-white p-4 md:p-6 rounded-lg shadow-md">
+          <h2 className="text-xl md:text-2xl font-bold mb-4 text-green-600">Activities</h2>
           <div className="overflow-x-auto">
             <table className="min-w-full bg-white rounded-lg">
               <thead>
                 <tr>
-                  <th className="py-3 px-6 border-b-2 border-gray-300">Action Type</th>
-                  <th className="py-3 px-6 border-b-2 border-gray-300">Description</th>
-                  <th className="py-3 px-6 border-b-2 border-gray-300">Date</th>
-                  <th className="py-3 px-6 border-b-2 border-gray-300">Time (minutes)</th>
+                  <th className="py-2 md:py-3 px-4 md:px-6 border-b-2 border-gray-300">Action Type</th>
+                  <th className="py-2 md:py-3 px-4 md:px-6 border-b-2 border-gray-300">Description</th>
+                  <th className="py-2 md:py-3 px-4 md:px-6 border-b-2 border-gray-300">Date</th>
+                  <th className="py-2 md:py-3 px-4 md:px-6 border-b-2 border-gray-300">Time (minutes)</th>
                 </tr>
               </thead>
               <tbody>
                 {dashboardData.actions.map((action, index) => (
                   <tr key={index} className="hover:bg-gray-100">
-                    <td className="py-3 px-6 border-b">{action.actionType}</td>
-                    <td className="py-3 px-6 border-b">{action.description}</td>
-                    <td className="py-3 px-6 border-b">
+                    <td className="py-2 md:py-3 px-4 md:px-6 border-b">{action.actionType}</td>
+                    <td className="py-2 md:py-3 px-4 md:px-6 border-b">{action.description}</td>
+                    <td className="py-2 md:py-3 px-4 md:px-6 border-b">
                       {new Date(action.date).toLocaleDateString()}
                     </td>
-                    <td className="py-3 px-6 border-b">{action.time}</td>
+                    <td className="py-2 md:py-3 px-4 md:px-6 border-b">{action.time}</td>
                   </tr>
                 ))}
               </tbody>
@@ -86,11 +86,11 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      <div className="mt-10 bg-white p-6 rounded-lg shadow-md text-center">
-        <h2 className="text-2xl font-bold mb-4 text-green-600">Total Action Time</h2>
-        <p className="text-3xl text-gray-700">{totalActionTime} minutes</p>
+      <div className="mt-6 md:mt-10 bg-white p-4 md:p-6 rounded-lg shadow-md text-center">
+        <h2 className="text-xl md:text-2xl font-bold mb-4 text-green-600">Total Action Time</h2>
+        <p className="text-2xl md:text-3xl text-gray-700">{totalActionTime} minutes</p>
         {totalActionTime > 300 && (
-          <p className="text-green-700 text-xl font-bold mt-4">Today's goal complete!</p>
+          <p className="text-green-700 text-lg md:text-xl font-bold mt-4">Today's goal complete!</p>
         )}
       </div>
     </div>

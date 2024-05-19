@@ -14,12 +14,14 @@ import Resource from './components/Resource';
 import Profile from './components/Profile';
 import Chat from './components/Community-Chat';
 import Map from './components/Map';
+import Sidebar from './components/Navbar';
 
 function App() {
   return (
     <RecoilRoot>
       <Router>
         <Navbar />
+        <Sidebar/>
         <div className="container mx-auto p-4">
           <Routes>
             <Route path="/login" element={<Login />} />

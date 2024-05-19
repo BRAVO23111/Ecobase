@@ -10,8 +10,10 @@ const Home = () => {
   const [editedLocation, setEditedLocation] = useState('');
   const [username, setUsername] = useState('');
   const [joinedInitiatives, setJoinedInitiatives] = useState(new Set());
+  const [sidebarExpanded, setSidebarExpanded] = useState(false);
   const token = window.localStorage.getItem('token');
 
+  // Function to fetch all initiatives
   const fetchAllInitiatives = async () => {
     try {
       const response = await axios.get('https://ecobase-1.onrender.com/initiative', {
@@ -25,6 +27,7 @@ const Home = () => {
     }
   };
 
+  // Function to fetch user profile
   const fetchProfile = async () => {
     try {
       const response = await axios.get('https://ecobase-1.onrender.com/profile', {
@@ -38,11 +41,7 @@ const Home = () => {
     }
   };
 
-  useEffect(() => {
-    fetchAllInitiatives();
-    fetchProfile();
-  }, []);
-
+  // Function to join an initiative
   const joinInitiative = async (initiativeId) => {
     try {
       const response = await axios.post(
@@ -54,15 +53,21 @@ const Home = () => {
           },
         }
       );
-      setJoinedInitiatives((prevSet) => new Set(prevSet).add(initiativeId));
+      // Add the initiative ID to joinedInitiatives set
+      setJoinedInitiatives((prevSet) => {
+        const newSet = new Set(prevSet);
+        newSet.add(initiativeId);
+        // Store joined initiatives in local storage
+        window.localStorage.setItem('joinedInitiatives', JSON.stringify(Array.from(newSet)));
+        return newSet;
+      });
       alert(`Joined as ${username}`);
     } catch (error) {
       console.error('Error joining initiative:', error);
-      console.log(`Request to join initiative ${initiativeId} failed with status code:`, error.response.status);
-      console.log('Error message:', error.response.data.message);
     }
   };
 
+  // Function to delete an initiative
   const deleteInitiative = async (initiativeId) => {
     try {
       await axios.delete(`https://ecobase-1.onrender.com/initiative/${initiativeId}`, {
@@ -76,6 +81,7 @@ const Home = () => {
     }
   };
 
+  // Function to edit an initiative
   const editInitiative = (initiative) => {
     setEditedInitiative(initiative);
     setEditedName(initiative.name);
@@ -84,6 +90,7 @@ const Home = () => {
     setEditedLocation(initiative.location);
   };
 
+  // Function to save edited initiative
   const saveEditedInitiative = async () => {
     try {
       await axios.put(
@@ -107,8 +114,17 @@ const Home = () => {
     }
   };
 
+  useEffect(() => {
+    fetchAllInitiatives();
+    fetchProfile();
+    // Retrieve joined initiatives from local storage on component mount
+    const storedJoinedInitiatives = window.localStorage.getItem('joinedInitiatives');
+    if (storedJoinedInitiatives) {
+      setJoinedInitiatives(new Set(JSON.parse(storedJoinedInitiatives)));
+    }
+  }, []);
   return (
-    <div className="container mx-auto p-8 bg-gray-100 rounded-lg shadow-lg">
+    <div className={`container mx-auto p-8 bg-gray-100 rounded-lg shadow-lg transition-all duration-300 ease-in-out ${sidebarExpanded ? 'ml-64' : 'ml-0'} lg:ml-64`}>
       <h1 className="text-3xl font-bold mb-8 text-center text-gray-800">Initiatives</h1>
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white rounded-lg shadow">
@@ -127,19 +143,17 @@ const Home = () => {
                 <td className="py-3 px-6">{initiative.name}</td>
                 <td className="py-3 px-6">{initiative.description}</td>
                 <td className="py-3 px-6">{initiative.location}</td>
-                <td className="py-3 px-6">
-                  {new Date(initiative.date).toLocaleDateString()}
-                </td>
+                <td className="py-3 px-6">{new Date(initiative.date).toLocaleDateString()}</td>
                 <td className="py-3 px-6 flex space-x-2">
-                  <button
-                    className={`${
-                      joinedInitiatives.has(initiative._id) ? 'bg-gray-500' : 'bg-blue-500 hover:bg-blue-600'
-                    } text-white font-bold py-1 px-3 rounded-lg`}
-                    onClick={() => joinInitiative(initiative._id)}
-                    disabled={joinedInitiatives.has(initiative._id)}
-                  >
-                    {joinedInitiatives.has(initiative._id) ? 'Joined' : 'Join'}
-                  </button>
+                <button
+  className={`${
+    joinedInitiatives.has(initiative._id) ? 'bg-gray-500' : 'bg-blue-500 hover:bg-blue-600'
+  } text-white font-bold py-1 px-3 rounded-lg`}
+  onClick={() => joinInitiative(initiative._id)}
+  disabled={joinedInitiatives.has(initiative._id)}
+>
+  {joinedInitiatives.has(initiative._id) ? 'Joined' : 'Join'}
+</button>
                   <button
                     className="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-3 rounded-lg"
                     onClick={() => deleteInitiative(initiative._id)}
